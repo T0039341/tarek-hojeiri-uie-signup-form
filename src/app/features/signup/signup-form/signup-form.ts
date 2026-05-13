@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SignupPayload } from './signup-form.model';
+import { SignupPayload, SubmissionState } from './signup-form.model';
+import { SignupApi } from '../../../core/services/signup-api';
 
 @Component({
   selector: 'app-signup-form',
@@ -10,6 +11,8 @@ import { SignupPayload } from './signup-form.model';
 })
 export class SignupForm {
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly signupApi = inject(SignupApi);
+  readonly submissionState = signal<SubmissionState>('idle');
 
   readonly form = this.fb.group({
     firstName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -25,6 +28,26 @@ export class SignupForm {
 
     const payload: SignupPayload = this.form.getRawValue();
 
-    console.log('Form submitted with payload:', payload);
+    this.submissionState.set('submitting');
+
+    this.signupApi.submitSignup(payload).subscribe({
+      next: () => {
+        this.submissionState.set('success');
+        this.form.reset();
+      },
+      error: () => {
+        this.submissionState.set('error');
+      },
+    });
+  }
+
+  resetForm(): void {
+    this.form.reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+    });
+
+    this.submissionState.set('idle');
   }
 }

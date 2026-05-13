@@ -1,0 +1,28 @@
+{
+  "signups": [
+    {
+      "firstName": "Tarek",
+      "lastName": "El hojeiri",
+      "email": "t.hojeiri@gmail.com",
+      "id": 1
+    },
+    {
+      "firstName": "Tarek",
+      "lastName": "El hojeiri",
+      "email": "t.hojeiri@gmail.com",
+      "id": 2
+    },
+    {
+      "firstName": "Tarek",
+      "lastName": "El hojeiri",
+      "email": "t.hojeiri@gmail.com",
+      "id": 3
+    },
+    {
+      "firstName": "Tarek",
+      "lastName": "El hojeiri",
+      "email": "t.hojeiri@gmail.com",
+      "id": 4
+    }
+  ]
+}
