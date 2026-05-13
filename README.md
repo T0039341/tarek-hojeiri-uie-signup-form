@@ -1,59 +1,113 @@
-# TarekHojeiriUieSignupForm
+# tarek-hojeiri-uie-signup-form
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+This is a small Angular sign-up form project built as part of a UI engineering exercise.
 
-## Development server
+The app allows users to enter their first name, last name and email address, validates the inputs, and submits the data to a mock API using `json-server`.
 
-To start a local development server, run:
+I mainly focused on keeping the implementation clean, responsive and accessible while using modern Angular patterns.
 
-```bash
-ng serve
-```
+Some of the things included in the project:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- standalone Angular architecture
+- typed reactive forms
+- validation and accessibility handling
+- responsive SCSS styling
+- mock API integration
+- unit tests with Vitest
+- simple CI workflow using GitHub Actions
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tech Stack
 
-```bash
-ng generate component component-name
-```
+- Angular 21
+- TypeScript
+- SCSS
+- RxJS
+- Vitest
+- json-server
+- GitHub Actions
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Running the project
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Install dependencies:
 
 ```bash
-ng test
+npm install
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Start the Angular development server:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The app runs on:
 
-## Additional Resources
+```txt
+http://localhost:4200
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Running the mock API
+
+The project uses `json-server` as a lightweight mock backend.
+
+Start it with:
+
+```bash
+npm run mock-api
+```
+
+The mock API runs on:
+
+```txt
+http://localhost:3000
+```
+
+Submitted entries are stored in:
+
+```txt
+db.json
+```
+
+---
+
+## Running tests
+
+Run tests in watch mode:
+
+```bash
+npm test
+```
+
+Run tests once (used in CI):
+
+```bash
+npm run test:ci
+```
+
+---
+
+## Building the project
+
+Create a production build with:
+
+```bash
+npm run build
+```
+
+---
+
+## Notes
+
+A few implementation choices I made during the exercise:
+
+- used standalone Angular APIs instead of NgModules
+- used `NonNullableFormBuilder` for typed forms
+- added validation feedback and accessibility improvements
+- added a lightweight CI workflow to run tests and builds automatically
+- kept the mock backend intentionally simple
