@@ -1,0 +1,146 @@
+@use '../../../../styles/variables' as *;
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.signup {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: $spacing-xl;
+  background: $color-page-bg;
+}
+
+.signup__card {
+  width: 100%;
+  max-width: 36rem;
+  padding: $spacing-2xl;
+  border-radius: $radius-card;
+  background: $color-surface;
+  box-shadow: $shadow-card;
+}
+
+.signup__title {
+  margin: 0 0 $spacing-sm;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  line-height: 1.1;
+  color: $color-text-primary;
+}
+
+.signup__intro {
+  margin: 0 0 $spacing-xl;
+  text-align: center;
+  color: $color-text-secondary;
+  font-size: 1rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid $color-border;
+  border-radius: $radius-control;
+  background: $color-surface;
+  color: $color-text-primary;
+  font-size: 1rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+input::placeholder {
+  color: $color-text-secondary;
+}
+
+input:focus {
+  outline: none;
+  border-color: $color-focus;
+  box-shadow: 0 0 0 4px rgba($color-focus, 0.12);
+}
+
+input[aria-invalid='true'] {
+  border-color: $color-error;
+  box-shadow: 0 0 0 4px rgba($color-error, 0.08);
+}
+
+.field-error {
+  min-height: 1.25rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: $color-error;
+  opacity: 0;
+  transform: translateY(-0.15rem);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.field-error:not(:empty) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+button {
+  width: 100%;
+  padding: $spacing-md;
+  border: none;
+  border-radius: $radius-control;
+  background: $color-button-bg;
+  color: $color-surface;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease,
+    opacity 0.25s ease;
+}
+
+button:hover:not(:disabled) {
+  background: $color-button-bg-hover;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 4px solid rgba($color-focus, 0.2);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .signup {
+    padding: $spacing-md;
+  }
+
+  .signup__card {
+    padding: $spacing-lg;
+  }
+}
