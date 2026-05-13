@@ -1,1 +1,48 @@
-<p>signup-form works!</p>
+<form [formGroup]="form" class="signup-form" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <label for="firstName">First name</label>
+
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      autocomplete="given-name"
+      [attr.aria-invalid]="form.controls.firstName.invalid"
+    />
+
+    @if (form.controls.firstName.touched && form.controls.firstName.hasError('required')) {
+      <p class="field-error">First name is required.</p>
+    }
+  </div>
+  <div class="form-field">
+    <label for="lastName">Last name</label>
+
+    <input
+      id="lastName"
+      type="text"
+      formControlName="lastName"
+      autocomplete="family-name"
+      [attr.aria-invalid]="form.controls.lastName.invalid"
+    />
+
+    @if (form.controls.lastName.touched && form.controls.lastName.hasError('required')) {
+      <p class="field-error">Last name is required.</p>
+    }
+  </div>
+  <div class="form-field">
+    <label for="email">Email</label>
+
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      autocomplete="email"
+      [attr.aria-invalid]="form.controls.email.invalid"
+    />
+
+    @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+      <p class="field-error">Please enter a valid email address.</p>
+    }
+  </div>
+  <button type="submit" [disabled]="form.invalid">Sign up</button>
+</form>
