@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "verify": "npm run test:ci && npm run build",
-    "test:ci": "vitest run",
+    "test:ci": "ng test --watch=false",
     "mock-api": "json-server --watch db.json --port 3000",
     "test": "ng test"
   },
