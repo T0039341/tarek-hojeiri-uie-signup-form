@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SignupPayload, SubmissionState } from './signup-form.model';
 import { SignupApi } from '../../../core/services/signup-api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-signup-form',
@@ -12,6 +13,7 @@ import { SignupApi } from '../../../core/services/signup-api';
 export class SignupForm {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly signupApi = inject(SignupApi);
+  private readonly destroyRef = inject(DestroyRef);
   readonly submissionState = signal<SubmissionState>('idle');
 
   readonly form = this.fb.group({
@@ -30,15 +32,17 @@ export class SignupForm {
 
     this.submissionState.set('submitting');
 
-    this.signupApi.submitSignup(payload).subscribe({
-      next: () => {
-        this.submissionState.set('success');
-        this.form.reset();
-      },
-      error: () => {
-        this.submissionState.set('error');
-      },
-    });
+    this.signupApi
+      .submitSignup(payload)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.submissionState.set('success');
+        },
+        error: () => {
+          this.submissionState.set('error');
+        },
+      });
   }
 
   resetForm(): void {
